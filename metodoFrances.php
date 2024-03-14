@@ -17,13 +17,19 @@
  // CALCULO LA CUOTA FIJA, CONSIDERANDO LA FORMULA DE AMORTIZACION.
 
     
-    $cuotaAux = $capital * (($interes/$cuotas)/(1-pow(1+($interes/$cuotas),(-$cuotas))));
-    $cuota_fija = round($cuotaAux); //REDONDEO EL NUMERO
+    // $cuotaAux = $capital * (($interes/$cuotas)/(1-pow(1+($interes/$cuotas),(-$cuotas))));
+    // $cuota_fija = round($cuotaAux); //REDONDEO EL NUMERO
+
+
+    $cuotaDeudor = $capital*(($interes)/ ( 1-pow((1+$interes) , ($cuotas)*-1) )); // Calcular Amortizacion
+    $cuotaDeudor = round($cuotaDeudor);
     //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
-    $saldo_pendiente = $capital;
-    $amortizacion = 0;
-    
-    
+    $saldo_inicial = $capital;
+    $inicioOperacion = $capital - $cuotaDeudor;
+    $inicioOperacion = round( $inicioOperacion);
+
+
+    // var_dump($saldo_inicial);
     ///////////////////////////////////////////////////////
     echo "<table border='1'>
             <tr>
@@ -37,29 +43,33 @@
 
             echo "<tr>
                 <td>0</td>
-                <td>$cuota_fija</td>
-                <td>$saldo_pendiente</td> 
+                <td>$cuotaDeudor</td>
+                <td>$capital</td> 
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
             </tr>";
     for ($i = 1; $i <= $cuotas; $i++) {
-        $auxIntereses = $interes * $cuotas;
-        $deudaActual = $capital - $amortizacion;
-        $interesesPagos = $deudaActual * $auxIntereses;
-        $amortizacion = $cuota_fija - $interesesPagos;
 
-        $saldo_pendiente = $saldo_pendiente - $cuota_fija; //FALTANTE PARA TERMINAR DE ACREDITAR
+        $intereses = $saldo_inicial * $interes;
+        $intereses = round($intereses);
+
+        $abonoActual = $cuotaDeudor - $intereses;
+        $abonoActual = round($abonoActual);
+
+        $saldoRestante = $saldo_inicial - $abonoActual;
+        $saldoRestante = round($saldoRestante);
 
 
         echo "<tr>
                 <td>$i</td>
-                <td>$cuota_fija</td>
-                <td>$saldo_pendiente</td> 
-                <td>$cuota_fija</td>
-                <td>$interesesPagos</td>
-                <td>$amortizacion</td>
+                <td>$cuotaDeudor</td>
+                <td>$saldo_inicial</td> 
+                <td>$abonoActual</td>
+                <td>$intereses</td>
+                <td>$saldoRestante</td>
             </tr>";
+            $saldo_inicial = $saldoRestante;
     }
     
     echo "</table>";
