@@ -14,18 +14,15 @@
 
     // $totalInteres = $interes * 100 / $capital;
 
- // CALCULO LA CUOTA FIJA, CONSIDERANDO LA SIGUIENTE FORMULA 
- // C = V / (1-(1+i))^N)/i) donde C es la cuota, V el capital total, N el numero de cuotas y i el interes.
-    // $cuota_fija = (($capital / (1-(1+$interes))**$cuotas)/$totalInteres);
+ // CALCULO LA CUOTA FIJA, CONSIDERANDO LA FORMULA DE AMORTIZACION.
 
-
-    // $cuota_fija = $capital * ($interes/$cuotas)/1-pow(1+($interes/$cuotas),(-$cuotas));
-
-    $cuota_fija = $capital * (($interes/$cuotas)/(1-pow(1+($interes/$cuotas),(-$cuotas))));
-
- //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
+    
+    $cuotaAux = $capital * (($interes/$cuotas)/(1-pow(1+($interes/$cuotas),(-$cuotas))));
+    $cuota_fija = round($cuotaAux); //REDONDEO EL NUMERO
+    //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
     $saldo_pendiente = $capital;
-
+    $amortizacion = 0;
+    
     
     ///////////////////////////////////////////////////////
     echo "<table border='1'>
@@ -46,12 +43,11 @@
                 <td>0</td>
                 <td>0</td>
             </tr>";
-
     for ($i = 1; $i <= $cuotas; $i++) {
         $auxIntereses = $interes * $cuotas;
+        $deudaActual = $capital - $amortizacion;
         $interesesPagos = $deudaActual * $auxIntereses;
         $amortizacion = $cuota_fija - $interesesPagos;
-        $deudaActual = $capital - $amortizacion;
 
         $saldo_pendiente = $saldo_pendiente - $cuota_fija; //FALTANTE PARA TERMINAR DE ACREDITAR
 
