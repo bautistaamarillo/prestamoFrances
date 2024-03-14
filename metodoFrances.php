@@ -26,6 +26,7 @@
  //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
     $saldo_pendiente = $capital;
 
+    
     ///////////////////////////////////////////////////////
     echo "<table border='1'>
             <tr>
@@ -37,18 +38,32 @@
                 <th>Capital</th>
             </tr>";
 
+            echo "<tr>
+                <td>0</td>
+                <td>$cuota_fija</td>
+                <td>$saldo_pendiente</td> 
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>";
+
     for ($i = 1; $i <= $cuotas; $i++) {
-        
+        $auxIntereses = $interes * $cuotas;
+        $interesesPagos = $deudaActual * $auxIntereses;
+        $amortizacion = $cuota_fija - $interesesPagos;
+        $deudaActual = $capital - $amortizacion;
+
+        $saldo_pendiente = $saldo_pendiente - $cuota_fija; //FALTANTE PARA TERMINAR DE ACREDITAR
 
 
-        // echo "<tr>
-        //         <td>$i</td>
-        //         <td>$cuota_fija</td>
-        //         <td>$saldo_pendiente</td> 
-        //         <td>$cuota_fija</td>
-        //         <td>$interes_cuota</td>
-        //         <td>$amortizacion</td>
-        //     </tr>";
+        echo "<tr>
+                <td>$i</td>
+                <td>$cuota_fija</td>
+                <td>$deudaActual</td> 
+                <td>$cuota_fija</td>
+                <td>$interesesPagos</td>
+                <td>$amortizacion</td>
+            </tr>";
     }
     
     echo "</table>";
