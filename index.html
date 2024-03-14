@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Amortización</title>
+</head>
+
+<body>
+    <h1>Tabla de Amortización - Método Francés</h1><br>
+    <form action="metodoFrances.php" method="post" name="datosFormulario">
+
+        <label for="capital">Capital a prestar:</label>
+        <input type="number" name="capitalTotal" required><br><br>
+
+        <label for="tasa">Tasa de interés:</label>
+        <input type="number" name="tasaInteres" required><br><br>
+
+        <label for="cuotas">Cantidad de cuotas:</label>
+        <input type="number" name="cantidadCuotas" required><br><br>
+
+        <label for="cuotas">Periodicidad:</label>
+        <input type="text" name="periodicidad" required><br><br>
+
+        <input type="submit" value="Generar Tabla">
+
+
+    </form>
+</body>
+
+</html>
