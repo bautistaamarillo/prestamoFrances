@@ -37,26 +37,22 @@
                 <th>Capital</th>
             </tr>";
 
-            
-
-            //LOGICA A RESOLVER
-
-            var_dump($cuota_fija);
+    for ($i = 1; $i <= $cuotas; $i++) {
         
-            //
 
 
         // echo "<tr>
-        //         <td>$numeroCuota</td>
-        //         <td>$cuotaFija</td>
-        //         <td>$saldoPendiente</td>
-        //         <td>$capitalPago</td>
-        //         <td>$interesPago</td>
-        //         <td>$capitalTotalPago</td>
+        //         <td>$i</td>
+        //         <td>$cuota_fija</td>
+        //         <td>$saldo_pendiente</td> 
+        //         <td>$cuota_fija</td>
+        //         <td>$interes_cuota</td>
+        //         <td>$amortizacion</td>
         //     </tr>";
+    }
     
     echo "</table>";
-     ///////////////////////////////////////////////////////
+    
     ?>
 </body>
 </html>
