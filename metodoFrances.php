@@ -8,15 +8,41 @@
 <body>
     <h1>Tabla de Amortización - Método Francés</h1>
     <?php
-    $capitalTotal=$_POST["capitalTotal"];
-    $tasaInteres=$_POST["tasaInteres"] / 100; //Obtengo directamente el porcentaje;
-    $cantidadCuotas=$_POST["cantidadCuotas"];
-    $periodicidad=$_POST["periodicidad"];
- 
+    $capital = $_POST['capitalTotal'];
+    $interes = $_POST['tasaInteres'] / 100; // PASO A PORCENTAJE EL INTERES
+    $cuotas = $_POST['cantidadCuotas'];
+
+ // CALCULO LA CUOTA FIJA, QUE LUEGO COMPARO CON EL INTERES PAGO Y EL CAPITAL PAGO (DEBE SER IGUAL) 
+    $cuota_fija = $capital * ($interes / (1 - pow(1 + $interes, -$cuotas)));
+
+ //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
+    $saldo_pendiente = $capital;
+
+    ///////////////////////////////////////////////////////
+    echo "<table border='1'>
+            <tr>
+                <th>Cuota</th>
+                <th>Capital Pendiente</th>
+                <th>Dinero Pagado</th>
+                <th>Interés</th>
+                <th>Capital</th>
+            </tr>";
+
+            //LOGICA A RESOLVER
+
+        echo "<tr>
+                <td>$numeroCuota</td>
+                <td>$saldoPendiente</td>
+                <td>$cuotaFija</td>
+                <td>$interesPago</td>
+                <td>$capitalPago</td>
+            </tr>";
+    
+    echo "</table>";
+     ///////////////////////////////////////////////////////
     ?>
 </body>
 </html>
-
 
 
 <!-- 
@@ -25,7 +51,5 @@ datos de entrada el capital, tasa de interés y cantidad de cuotas y periodicida
 capital 1000 intereses 20% cuotas 12 periodo mensual
  *tabla de amortización es lo que tengo que mostrar*
  TNA = taza nominal anual
- método francés proporción decreciente en el capital y ascendente en el interés
-
 
  -->
