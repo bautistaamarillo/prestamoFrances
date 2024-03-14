@@ -55,7 +55,7 @@
         echo "<tr>
                 <td>$i</td>
                 <td>$cuota_fija</td>
-                <td>$deudaActual</td> 
+                <td>$saldo_pendiente</td> 
                 <td>$cuota_fija</td>
                 <td>$interesesPagos</td>
                 <td>$amortizacion</td>
