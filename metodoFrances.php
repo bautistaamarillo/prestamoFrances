@@ -9,11 +9,19 @@
     <h1>Tabla de Amortización - Método Francés</h1>
     <?php
     $capital = $_POST['capitalTotal'];
-    $interes = $_POST['tasaInteres'] / 100; // PASO A PORCENTAJE EL INTERES
+    $interes = $_POST['tasaInteres']/100; 
     $cuotas = $_POST['cantidadCuotas'];
 
- // CALCULO LA CUOTA FIJA, QUE LUEGO COMPARO CON EL INTERES PAGO Y EL CAPITAL PAGO (DEBE SER IGUAL) 
-    $cuota_fija = $capital * ($interes / (1 - pow(1 + $interes, -$cuotas)));
+    // $totalInteres = $interes * 100 / $capital;
+
+ // CALCULO LA CUOTA FIJA, CONSIDERANDO LA SIGUIENTE FORMULA 
+ // C = V / (1-(1+i))^N)/i) donde C es la cuota, V el capital total, N el numero de cuotas y i el interes.
+    // $cuota_fija = (($capital / (1-(1+$interes))**$cuotas)/$totalInteres);
+
+
+    // $cuota_fija = $capital * ($interes/$cuotas)/1-pow(1+($interes/$cuotas),(-$cuotas));
+
+    $cuota_fija = $capital * (($interes/$cuotas)/(1-pow(1+($interes/$cuotas),(-$cuotas))));
 
  //INICIALIZO EL SALDO PENDIENTE, CONCIDERO EL CAPITAL TOTAL
     $saldo_pendiente = $capital;
@@ -21,22 +29,31 @@
     ///////////////////////////////////////////////////////
     echo "<table border='1'>
             <tr>
-                <th>Cuota</th>
+                <th>Nº Cuota</th>
+                <th>Cuota Fija</th>
                 <th>Capital Pendiente</th>
                 <th>Dinero Pagado</th>
                 <th>Interés</th>
                 <th>Capital</th>
             </tr>";
 
+            
+
             //LOGICA A RESOLVER
 
-        echo "<tr>
-                <td>$numeroCuota</td>
-                <td>$saldoPendiente</td>
-                <td>$cuotaFija</td>
-                <td>$interesPago</td>
-                <td>$capitalPago</td>
-            </tr>";
+            var_dump($cuota_fija);
+        
+            //
+
+
+        // echo "<tr>
+        //         <td>$numeroCuota</td>
+        //         <td>$cuotaFija</td>
+        //         <td>$saldoPendiente</td>
+        //         <td>$capitalPago</td>
+        //         <td>$interesPago</td>
+        //         <td>$capitalTotalPago</td>
+        //     </tr>";
     
     echo "</table>";
      ///////////////////////////////////////////////////////
